@@ -27,7 +27,7 @@ jobs:
           pip install requests
 
       - name: compile with nuitka
-        run: nuitka --onefile debug-main/bin/main.py
+        run: python -m nuitka --onefile debug-main/bin/main.py
 
       - name: Create Release
         id: create_release
