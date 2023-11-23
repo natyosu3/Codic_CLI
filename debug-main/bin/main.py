@@ -70,13 +70,14 @@ def api(text):
         print(f"Error: {response.status_code} - {response.text}")
 
 
-def test():
-    # exeファイルの場所を取得
-    exe_location = sys.executable
+def get_temp_dir():
+    temp_dir = os.path.dirname(os.path.abspath(sys.executable))
+    return temp_dir
 
-    # 完全なパスに変換
-    exe_location = os.path.abspath(exe_location)
-    print("Exeファイルの場所:", exe_location)
+def test():
+    # 一時ディレクトリの場所を取得
+    temp_dir = get_temp_dir()
+    print("一時ディレクトリの場所:", temp_dir)
 
 test()
 # load_api_token()
