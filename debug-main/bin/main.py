@@ -47,7 +47,7 @@ def load_default_casing():
     else:
         with open(config_path, "w") as f:
             f.write(yaml.safe_dump({"API_TOKEN": None,
-                                    "DEFAULT_CASING": "snake"
+                                    "DEFAULT_CASING": "lower underscore"
                                     }))
 
 
