@@ -8,7 +8,8 @@ on:
 
 jobs:
   run-python:
-    runs-on: ubuntu-latest
+    # Windows is currently the only platform this action supports
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v3
@@ -37,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: exe
-          path: build/cordic.exe
+          path: build/main.exe
