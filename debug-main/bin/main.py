@@ -4,7 +4,7 @@ import yaml
 from pathlib import Path
 import os, sys
 
-config_path = Path(__file__).parent.parent / "config" / "config.yaml"
+config_path = Path(sys.argv[0]).parent.parent / "config" / "config.yaml"
 
 parser = argparse.ArgumentParser(
     prog="cordic",
