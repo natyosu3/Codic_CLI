@@ -69,15 +69,8 @@ def api(text):
     else:
         print(f"Error: {response.status_code} - {response.text}")
 
-
-def get_temp_dir():
-    temp_dir = os.path.dirname(os.path.abspath(sys.executable))
-    return temp_dir
-
 def test():
-    # 一時ディレクトリの場所を取得
-    temp_dir = get_temp_dir()
-    print("一時ディレクトリの場所:", temp_dir)
+    print(sys.argv[0])
 
 test()
 # load_api_token()
