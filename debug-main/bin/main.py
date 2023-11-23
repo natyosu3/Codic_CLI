@@ -70,4 +70,7 @@ def api(text):
         print(f"Error: {response.status_code} - {response.text}")
 
 
-api(args.text)
+if args.text:
+    api(args.text)
+else:
+    parser.print_help()
