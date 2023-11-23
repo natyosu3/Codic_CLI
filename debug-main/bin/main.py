@@ -70,7 +70,14 @@ def api(text):
         print(f"Error: {response.status_code} - {response.text}")
 
 
-if args.text:
-    api(args.text)
-else:
-    parser.print_help()
+def set_api_token(token):
+    with open(config_path, "r+") as f:
+        data = yaml.safe_load(f.read)
+        data["API_TOKEN"] = token
+        f.write(yaml.safe_dump(data))
+
+
+if args.api_token: set_api_token(args.api_token)
+
+if args.text: api(args.text)
+else: parser.print_help()
