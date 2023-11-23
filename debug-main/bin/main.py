@@ -4,7 +4,8 @@ import yaml
 from pathlib import Path
 import os, sys
 
-config_path = Path(os.path.abspath(sys.argv[0])).parent.parent / "config" / "config.yaml"
+config_dir = Path(os.path.abspath(sys.argv[0])).parent.parent / "config"
+config_path = config_dir / "config.yaml"
 
 parser = argparse.ArgumentParser(
     prog="cordic",
@@ -18,24 +19,24 @@ args = parser.parse_args()
 def check_config_existence(func):
     def wrapper(*args, **kwargs):
         if not(os.path.isfile(config_path)):
-            print("configuration file Not Found.")
-            print("Create configuration directory...")
-            try:
-                os.mkdir(Path(os.path.abspath(sys.argv[0])).parent.parent / "config")
-                print("Success.")
-            except Exception as e:
-                print("Error. Could not create configuration directory.", e)
-                sys.exit()
+            print("configuration file Not Found. Creating...")
+
+            if not config_dir.is_dir():
+                try:
+                    config_dir.mkdir(parents=True, exist_ok=True)
+                    print("Configuration directory created successfully.")
+                except Exception as e:
+                    print(f"Error creating configuration directory: {e}")
+                    sys.exit()
             
-            print("Create configuration file...")
             try:
                 with open(config_path, "w") as f:
                     f.write(yaml.safe_dump({"API_TOKEN": None,
                                             "DEFAULT_CASING": "lower underscore"
                                             }))
-                print("Success.")
+                print("Configuration file created successfully.")
             except Exception as e:
-                print("Error. Could not create configuration file", e)
+                print(f"Error creating configuration file: {e}")
                 sys.exit()
 
         return func(*args, **kwargs)
