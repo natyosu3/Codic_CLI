@@ -4,13 +4,13 @@ import yaml
 from pathlib import Path
 import os, sys
 
-config_path = Path(sys.argv[0]).parent.parent / "config" / "config.yaml"
+config_path = Path(os.path.abspath(sys.argv[0])).parent.parent / "config" / "config.yaml"
 
 parser = argparse.ArgumentParser(
     prog="cordic",
     description="cordicのCLIです."
 )
-parser.add_argument("text", help="変換したいテキストを入力してください.", type=str, default=None)
+parser.add_argument("text", help="変換したいテキストを入力してください.", type=str, default=None, required=False)
 parser.add_argument("-a", "--api_token", help="codicのapiキーを設定してください.")
 args = parser.parse_args()
 
@@ -69,9 +69,5 @@ def api(text):
     else:
         print(f"Error: {response.status_code} - {response.text}")
 
-def test():
-    print(sys.argv[0])
 
-test()
-# load_api_token()
 api(args.text)
