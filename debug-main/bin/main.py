@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser(
     prog="cordic",
     description="cordicのCLIです."
 )
-parser.add_argument("text", help="変換したいテキストを入力してください.", type=str, default=None, required=False)
+parser.add_argument("text", help="変換したいテキストを入力してください.", type=str, default=None, nargs="?")
 parser.add_argument("-a", "--api_token", help="codicのapiキーを設定してください.")
 args = parser.parse_args()
 
