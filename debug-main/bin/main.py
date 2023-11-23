@@ -20,9 +20,11 @@ def check_config_existence(func):
         if not(os.path.isfile(config_path)):
             print("configuration file Not Found.")
             print("Create configuration directory...")
-            if os.mkdir(Path(os.path.abspath(sys.argv[0])).parent.parent / "config"): print("Success.")
-            else:
-                print("Error. Could not create configuration directory.")
+            try:
+                os.mkdir(Path(os.path.abspath(sys.argv[0])).parent.parent / "config")
+                print("Success.")
+            except Exception as e:
+                print("Error. Could not create configuration directory.", e)
                 sys.exit()
             
             print("Create configuration file...")
@@ -31,10 +33,10 @@ def check_config_existence(func):
                     f.write(yaml.safe_dump({"API_TOKEN": None,
                                             "DEFAULT_CASING": "lower underscore"
                                             }))
-            except:
-                print("Error. Could not create configuration file")
+                print("Success.")
+            except Exception as e:
+                print("Error. Could not create configuration file", e)
                 sys.exit()
-            print("Success.")
 
         return func(*args, **kwargs)
     return wrapper
