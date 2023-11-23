@@ -47,7 +47,7 @@ def load_default_casing():
     else:
         with open(config_path, "w") as f:
             f.write(yaml.safe_dump({"API_TOKEN": None,
-                                    "DEFAULT_CASING": "snake"
+                                    "DEFAULT_CASING": "lower underscore"
                                     }))
 
 
@@ -69,5 +69,16 @@ def api(text):
     else:
         print(f"Error: {response.status_code} - {response.text}")
 
+
+def get_temp_dir():
+    temp_dir = os.path.dirname(os.path.abspath(sys.executable))
+    return temp_dir
+
+def test():
+    # 一時ディレクトリの場所を取得
+    temp_dir = get_temp_dir()
+    print("一時ディレクトリの場所:", temp_dir)
+
+test()
 # load_api_token()
 api(args.text)

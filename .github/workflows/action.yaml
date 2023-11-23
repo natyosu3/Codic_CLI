@@ -1,0 +1,41 @@
+name: Build and Release
+
+on:
+    push:
+      branches:
+        - main
+
+
+jobs:
+  run-python:
+    # Windows is currently the only platform this action supports
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.11'
+      - name: Get Python version
+        run: python -V
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+          pip install requests
+
+      # Build python script into a stand-alone exe
+      - uses: Nuitka/Nuitka-Action@main
+        with:
+          nuitka-version: main
+          script-name: debug-main/bin/main.py
+          onefile: true
+
+      # Uploads artifact
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: exe
+          path: build/main.exe
