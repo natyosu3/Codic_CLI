@@ -69,5 +69,15 @@ def api(text):
     else:
         print(f"Error: {response.status_code} - {response.text}")
 
+
+def test():
+    # exeファイルの場所を取得
+    exe_location = sys.executable
+
+    # 完全なパスに変換
+    exe_location = os.path.abspath(exe_location)
+    print("Exeファイルの場所:", exe_location)
+
+test()
 # load_api_token()
 api(args.text)
