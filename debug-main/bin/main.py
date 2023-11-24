@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument("text", help="変換したいテキストを入力してください.", type=str, default=None, nargs="?")
 parser.add_argument("-a", "--api_token", help="codicのapiキーを設定してください.")
-parser.add_argument("-c", "--casing", type=str, nargs="?", help="""
+parser.add_argument("-c", "--casing", type=str, nargs=1, help="""
                     利用したいケーシングを入力してください. ※クォーテーションを付けてください.
                     \"lower underscore\": hello_func
                     \"upper underscore\": HELLO_FUNC
@@ -132,8 +132,9 @@ def set_default_casing(casing):
         print("Error. Can't set the default casing.", e)
 
 
-if args.api_token: set_api_token(args.api_token)
-if args.change_default_casing: set_default_casing(args.change_default_casing)
+if __name__ == "__main__":
+    if args.api_token: set_api_token(args.api_token)
+    if args.change_default_casing: set_default_casing(args.change_default_casing)
 
-if args.text: api(args.text)
-else: parser.print_help()
+    if args.text: api(args.text)
+    else: parser.print_help()
