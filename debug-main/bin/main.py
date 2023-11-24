@@ -98,7 +98,7 @@ def set_api_token(token):
         with open(config_path, "r+") as f:
             data = yaml.safe_load(f.read())
             data["API_TOKEN"] = token
-            f.write(yaml.safe_dump(data))
+            yaml.safe_dump(data, f)
         print("Success.")
         sys.exit()
     except Exception as e:
