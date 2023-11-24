@@ -31,9 +31,9 @@ def check_config_existence(func):
             
             try:
                 with open(config_path, "w") as f:
-                    f.write(yaml.safe_dump({"API_TOKEN": None,
+                    yaml.safe_dump(stream=f, data={"API_TOKEN": None,
                                             "DEFAULT_CASING": "lower underscore"
-                                            }))
+                                            })
                 print("Configuration file created successfully.")
             except Exception as e:
                 print(f"Error creating configuration file: {e}")
@@ -74,7 +74,7 @@ def api(text):
 
     payload = {
         "text": text,
-        "casing": "lower underscore"
+        "casing": load_default_casing()
     }
     response = requests.post(url, headers=headers, data=payload)
 
@@ -86,13 +86,17 @@ def api(text):
 
 @check_config_existence
 def set_api_token(token):
-    with open(config_path, "r+") as f:
-        data = yaml.safe_load(f.read())
-        data["API_TOKEN"] = token
-        f.write(yaml.safe_dump(data))
+    try:
+        with open(config_path, "r+") as f:
+            data = yaml.safe_load(f.read())
+            data["API_TOKEN"] = token
+            f.write(yaml.safe_dump(data))
+        print("Success.")
+        sys.exit()
+    except Exception as e:
+        print("Error. Can't set the api_token.", e)
 
 
 if args.api_token: set_api_token(args.api_token)
-
 if args.text: api(args.text)
 else: parser.print_help()
