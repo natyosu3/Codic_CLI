@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument("text", help="変換したいテキストを入力してください.", type=str, default=None, nargs="?")
 parser.add_argument("-a", "--api_token", help="codicのapiキーを設定してください.")
-parser.add_argument("-c", "--casing", help="""
+parser.add_argument("-c", "--casing", type=str, nargs="?", help="""
                     利用したいケーシングを入力してください. ※クォーテーションを付けてください.
                     \"lower underscore\": hello_func
                     \"upper underscore\": HELLO_FUNC
