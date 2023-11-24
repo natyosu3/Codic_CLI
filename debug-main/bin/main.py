@@ -9,7 +9,7 @@ config_dir = Path(os.path.abspath(sys.argv[0])).parent.parent / "config"
 config_path = config_dir / "config.yaml"
 
 parser = argparse.ArgumentParser(
-    prog="cordic - coc",
+    prog="coc",
     description="cordicのCLIです.",
     formatter_class=RawTextHelpFormatter
 )
@@ -23,6 +23,7 @@ parser.add_argument("-c", "--casing", help="""
                     pascal          : HelloFunc
                     hyphen          : hello-func
                     """)
+parser.add_argument("-cdc", "--change_default_casing", help="デフォルトのケーシングを変更します.")
 args = parser.parse_args()
 
 
@@ -78,13 +79,15 @@ def load_default_casing():
 @check_config_existence
 def api(text):
     url = "https://api.codic.jp/v1/engine/translate.json"
+    casing = args.casing if args.casing else load_default_casing()
+
     headers = {
         "Authorization": f"Bearer {load_api_token()}"
     }
 
     payload = {
         "text": text,
-        "casing": load_default_casing()
+        "casing": casing
     }
     response = requests.post(url, headers=headers, data=payload)
 
@@ -115,7 +118,22 @@ def set_api_token(token):
     except Exception as e:
         print("Error. Can't set the api_token.", e)
 
+@check_config_existence
+def set_default_casing(casing):
+    try:
+        with open(config_path, "r") as f:
+            data = yaml.safe_load(f)
+        with open(config_path, "w") as f:
+            data["DEFAULT_CASING"] = casing
+            yaml.safe_dump(data, f)
+        print("Success.")
+        sys.exit()
+    except Exception as e:
+        print("Error. Can't set the default casing.", e)
+
 
 if args.api_token: set_api_token(args.api_token)
+if args.change_default_casing: set_default_casing(args.change_default_casing)
+
 if args.text: api(args.text)
 else: parser.print_help()
