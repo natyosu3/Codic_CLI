@@ -8,7 +8,7 @@ config_dir = Path(os.path.abspath(sys.argv[0])).parent.parent / "config"
 config_path = config_dir / "config.yaml"
 
 parser = argparse.ArgumentParser(
-    prog="cordic",
+    prog="cordic - coc",
     description="cordicのCLIです."
 )
 parser.add_argument("text", help="変換したいテキストを入力してください.", type=str, default=None, nargs="?")
@@ -52,7 +52,7 @@ def load_api_token():
         return API_TOKEN
     else:
         print("API TOKENが設定されていません. 以下のコマンドを実行し, TOKENを設定してください.")
-        print("cordic -a xxxxxx(API TOKEN)")
+        print("coc -a xxxxxx(API TOKEN)")
         sys.exit()
 
 
@@ -81,8 +81,16 @@ def api(text):
     if response.status_code == 200:
         result = response.json()
         print(result[0]['translated_text'])
+    elif response.status_code == 401:
+        print(f"ERROR. 認証に失敗しました. 正しいapi tokenを設定してください.")
+        print("api token確認ページ -> https://codic.jp/my/api_status")
+        print()
+        print("-a オプションでapi tokenを設定してください.")
+        print("ex: coc -a xxxxxxxx(api token)")
+        sys.exit()
     else:
-        print(f"Error: {response.status_code} - {response.text}")
+        error_msg = response.text.decode("unicode-escape")
+        print(f"Error: {response.status_code} - {error_msg}")
 
 @check_config_existence
 def set_api_token(token):
