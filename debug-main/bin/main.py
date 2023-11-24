@@ -95,8 +95,9 @@ def api(text):
 @check_config_existence
 def set_api_token(token):
     try:
-        with open(config_path, "r+") as f:
+        with open(config_path, "r") as f:
             data = yaml.safe_load(f)
+        with open(config_path, "w") as f:
             data["API_TOKEN"] = token
             yaml.safe_dump(data, f)
         print("Success.")
