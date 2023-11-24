@@ -15,7 +15,7 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument("text", help="変換したいテキストを入力してください.", type=str, default=None, nargs="?")
 parser.add_argument("-a", "--api_token", help="codicのapiキーを設定してください.")
-parser.add_argument("-c", "--casing", type=str, nargs=1, default=None, help="""
+parser.add_argument("-u", "--using_case", type=str, nargs=1, default=None, help="""
                     利用したいケーシングを入力してください. ※クォーテーションを付けてください.
                     \"lower underscore\": hello_func
                     \"upper underscore\": HELLO_FUNC
@@ -79,7 +79,7 @@ def load_default_casing():
 @check_config_existence
 def api(text):
     url = "https://api.codic.jp/v1/engine/translate.json"
-    casing = args.casing if args.casing else load_default_casing()
+    casing = args.using_case if args.using_case else load_default_casing()
 
     headers = {
         "Authorization": f"Bearer {load_api_token()}"
