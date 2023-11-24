@@ -102,7 +102,7 @@ def api(text):
         print("ex: coc -a xxxxxxxx(api token)")
         sys.exit()
     else:
-        error_msg = response.text.decode("unicode-escape")
+        error_msg = response.text.encode()
         print(f"Error: {response.status_code} - {error_msg}")
 
 @check_config_existence
