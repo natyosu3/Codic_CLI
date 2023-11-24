@@ -96,7 +96,7 @@ def api(text):
 def set_api_token(token):
     try:
         with open(config_path, "r+") as f:
-            data = yaml.safe_load(f.read())
+            data = yaml.safe_load(f)
             data["API_TOKEN"] = token
             yaml.safe_dump(data, f)
         print("Success.")
