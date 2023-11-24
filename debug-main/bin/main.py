@@ -13,12 +13,12 @@ parser = argparse.ArgumentParser(
 )
 parser.add_argument("text", help="変換したいテキストを入力してください.", type=str, default=None, nargs="?")
 parser.add_argument("-a", "--api_token", help="codicのapiキーを設定してください.")
-parser.add_argument("-c", "--casing", help="""利用したいケーシングを入力してください.
-                    lower underscore: hello_func
-                    upper underscore: HELLO_FUNC
-                    camel           : helloFunc
-                    pascal          : HelloFunc
-                    hyphen          : hello-fun
+parser.add_argument("-c", "--casing", help="""利用したいケーシングを入力してください.\n
+                    lower underscore: hello_func\n
+                    upper underscore: HELLO_FUNC\n
+                    camel           : helloFunc\n
+                    pascal          : HelloFunc\n
+                    hyphen          : hello-fun\n
                     """)
 args = parser.parse_args()
 
