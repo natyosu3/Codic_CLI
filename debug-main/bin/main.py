@@ -5,7 +5,7 @@ import yaml
 from pathlib import Path
 import os, sys
 
-config_dir = Path(os.path.abspath(sys.executable)).parent / "config"
+config_dir = Path(os.path.abspath(sys._MEIPASS)).parent / "config"
 config_path = config_dir / "config.yaml"
 
 parser = argparse.ArgumentParser(
