@@ -5,7 +5,7 @@ import yaml
 from pathlib import Path
 import os, sys
 
-config_dir = config_dir = Path(os.path.dirname(os.path.abspath(__file__))) / "config"
+config_dir = config_dir = Path(os.path.dirname(sys.argv[0])) / "config"
 config_path = config_dir / "config.yaml"
 
 parser = argparse.ArgumentParser(
