@@ -2,10 +2,9 @@ import argparse
 from argparse import RawTextHelpFormatter
 import requests
 import yaml
-from pathlib import Path
 import os, sys
 
-config_dir = r"C:\config"
+config_dir = r"C:\coc-config"
 config_path = config_dir + r"\config.yaml"
 
 parser = argparse.ArgumentParser(

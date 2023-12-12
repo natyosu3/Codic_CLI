@@ -2,3 +2,4 @@
 debug-main/config/*
 main.build
 main.dist
+main.onefile-build
