@@ -5,8 +5,8 @@ import yaml
 from pathlib import Path
 import os, sys
 
-config_dir = config_dir = Path(os.path.dirname(sys.argv[0])) / "config"
-config_path = config_dir / "config.yaml"
+config_dir = r"C:\config"
+config_path = config_dir + r"\config.yaml"
 
 parser = argparse.ArgumentParser(
     prog="coc",
@@ -32,9 +32,9 @@ def check_config_existence(func):
         if not(os.path.isfile(config_path)):
             print("configuration file Not Found. Creating...")
 
-            if not config_dir.is_dir():
+            if not os.path.isdir(config_dir):
                 try:
-                    config_dir.mkdir(parents=True, exist_ok=True)
+                    os.mkdir(config_dir)
                     print("Configuration directory created successfully.")
                 except Exception as e:
                     print(f"Error creating configuration directory: {e}")

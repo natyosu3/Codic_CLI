@@ -1,2 +1,4 @@
 .venv
 debug-main/config/*
+main.build
+main.dist
