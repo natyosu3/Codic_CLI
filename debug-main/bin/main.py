@@ -9,7 +9,7 @@ config_path = config_dir + r"\config.yaml"
 
 parser = argparse.ArgumentParser(
     prog="coc",
-    description="cordicのCLIです.",
+    description="codicのCLIです.",
     formatter_class=RawTextHelpFormatter
 )
 parser.add_argument("text", help="変換したいテキストを入力してください.", type=str, default=None, nargs="?")

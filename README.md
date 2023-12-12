@@ -4,20 +4,20 @@
 
 ## Description
 
-このツールは[Cordicさん](https://codic.jp/)のAPIを利用したコマンドライン変数・関数名ジェネレータツールです.
+このツールは[Codicさん](https://codic.jp/)のAPIを利用したコマンドライン変数・関数名ジェネレータツールです.
 
 > ブラウザでの操作が億劫になったため, コンソール上で実行出来たら便利ではないかと考え作成しました.
 
 ## Installation (windows only)
 
-1. [リリースページ](https://github.com/natyosu3/Cordic_CLI/releases/tag/1.0.0)から最新のインストーラ( **Setup-Corid-Cli.exe** )をダウンロード・実行
+1. [リリースページ](https://github.com/natyosu3/Codic_CLI/releases/tag/1.0.0)から最新のインストーラ( **Setup-Codic-Cli.exe** )をダウンロード・実行
 2. インストーラの指示に従いインストールを行う
 
-    インストールが終了するとcoc.exe(cordic-cli)が**環境変数PATH**に設定されます.
+    インストールが終了するとcoc.exe(codic-cli)が**環境変数PATH**に設定されます.
 
 3. APIトークンの取得
-    cordic-cliを利用するにはCordicさんのAPIトークンを取得する必要があります.
-    APIトークンはCordicに会員登録を行い
+    codic-cliを利用するにはCodicさんのAPIトークンを取得する必要があります.
+    APIトークンはCodicに会員登録を行い
 
     https://codic.jp/my/api_status
 
